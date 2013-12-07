@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <ScrollView
+         xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/scrollView1"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#262626"
+    android:orientation="vertical" >
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:background="#880dbf"
+         android:orientation="vertical"
+          >
+
+         <TextView
+             android:id="@+id/textView1"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:text="MOVIES"
+             style="@android:style/Widget.Button"
+             android:gravity="left"
+             android:textColor="#262626"
+             android:textSize="14sp"
+             android:paddingBottom="5dp"
+             android:paddingLeft="10dp"
+             android:paddingTop="5dp"
+              />
+
+         <HorizontalScrollView
+             android:id="@+id/horizontalScrollView1"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+              android:background="#262626" >
+
+             <LinearLayout
+                 android:id="@+id/hscrol"
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:gravity="center_vertical"
+                 android:orientation="horizontal"
+                  android:background="#880dbf" >
+             </LinearLayout>
+         </HorizontalScrollView>
+
+     </LinearLayout>
+     
+     
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="vertical" 
+          android:background="#880dbf">
+
+         <TextView
+             android:id="@+id/textView2"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:gravity="left"
+             android:paddingBottom="5dp"
+             android:paddingLeft="10dp"
+             android:paddingTop="5dp"
+             android:text="SERIES"
+             style="@android:style/Widget.Button"
+             android:textColor="#262626"
+             android:textSize="14sp" 
+             
+             />
+
+         <HorizontalScrollView
+             android:id="@+id/horizontalScrollView2"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+              android:background="#262626" >
+
+             <LinearLayout
+                 android:id="@+id/hscrol2"
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:gravity="center_vertical"
+                 android:orientation="horizontal"
+                  android:background="#880dbf" >
+             </LinearLayout>
+         </HorizontalScrollView>
+
+     </LinearLayout>
+     
+     
+      <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="vertical" 
+          android:background="#880dbf">
+
+         <TextView
+             android:id="@+id/textView3"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:gravity="left"
+             android:paddingBottom="5dp"
+             android:paddingLeft="10dp"
+             android:paddingTop="5dp"
+             android:text="Pay Per View"
+             style="@android:style/Widget.Button"
+             android:textColor="#262626"
+             android:textSize="14sp" 
+             
+             />
+
+         <HorizontalScrollView
+             android:id="@+id/horizontalScrollView3"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+              android:background="#262626" >
+
+             <LinearLayout
+                 android:id="@+id/hscrol3"
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:gravity="center_vertical"
+                 android:orientation="horizontal"
+                  android:background="#880dbf" >
+             </LinearLayout>
+         </HorizontalScrollView>
+
+     </LinearLayout>
+
+  
+         
+   
+
+</LinearLayout>
+   </ScrollView>

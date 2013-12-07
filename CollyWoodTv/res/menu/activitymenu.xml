@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+      <item android:id="@+id/action_search"
+          app:actionViewClass="android.support.v7.widget.SearchView"
+          android:icon="@drawable/ic_action_search"
+          android:title="@string/search_title"
+          android:showAsAction="always"
+          app:showAsAction="always"
+           />
+      
+       
+    <item 
+    android:id="@+id/menu_Filter"
+    android:icon="@drawable/ic_action_filter_9"
+    android:showAsAction="always"
+    app:showAsAction="always|withText">
+    <menu>
+         <item
+            android:id="@+id/menuAll"
+            android:title="All"/>
+        <item
+            android:id="@+id/menuMovies"
+            android:title="Movies" />
+        <item
+            android:id="@+id/menuSeries"
+            android:title="Series" />
+          
+    </menu>
+</item>
+ <item 
+    android:id="@+id/root_menu"
+    android:icon="@drawable/ic_action_overflow"
+    android:showAsAction="always"
+    app:showAsAction="always" >
+   
+     <menu>
+       <item android:id="@+id/action_profile"
+          android:icon="@drawable/ic_action_user"
+          android:title="@string/string_user"
+          app:icon="@drawable/ic_action_user"
+          android:showAsAction="never|withText"
+           />
+       <item android:id="@+id/action_subscribe"
+          android:icon="@drawable/ic_action_video"
+          android:title="@string/string_sub"
+          app:icon="@drawable/ic_action_video"
+          android:showAsAction="never|withText"
+           />
+        
+       </menu>
+   </item>
+      
+  
+
+</menu>
