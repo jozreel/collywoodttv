@@ -22,6 +22,7 @@ import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -93,6 +94,7 @@ YouTubePlayer.OnInitializedListener{
         youTubeView.initialize(DEVELOPER_KEY, this);
         
         getComments();
+        getRattings();
       
 	}
 	@Override
@@ -111,11 +113,22 @@ YouTubePlayer.OnInitializedListener{
 	
 	public void getComments()
 	{
+		   String idd = bd.getString("id");
 		  HashMap<String, String> mp = new HashMap<String, String>();
 		   mp.put("tag", "comment");
-		   //mp.put("id", "ALL");
+		   mp.put("id",idd);
 		   GetComment cm = new GetComment(mp,this);
 		   cm.execute(serverUrl);
+	}
+	
+	public void getRattings()
+	{
+		   String idd = bd.getString("id");
+		  HashMap<String, String> mp = new HashMap<String, String>();
+		   mp.put("tag", "ratings");
+		   mp.put("id",idd);
+		   getRatting gr = new getRatting(mp,this);
+		   gr.execute(serverUrl);
 	}
 	
 	public void Callback(String Result)
@@ -191,6 +204,27 @@ YouTubePlayer.OnInitializedListener{
 	   	{
 	   		Log.e("JSON Parser", "Error parsing data " + e.toString());
 	   	}
+	}
+	
+	
+	public void CallBackRt(String Results)
+	{
+
+		 JSONObject jsonObj = null;
+	       String str = Results;
+	       
+	       try{
+	   		jsonObj = new  JSONObject(str);
+	   		Iterator<?> keys = jsonObj.keys();
+	   		float rating = Float.parseFloat(jsonObj.getString("rating"));
+	   		RatingBar rtb = (RatingBar)findViewById(R.id.ratingBar1);
+	   		rtb.setRating(rating);
+	       }
+	       catch(Exception e)
+		   	{
+		   		Log.e("JSON Parser", "Error parsing data " + e.toString());
+		   	}
+		
 	}
 	 
 

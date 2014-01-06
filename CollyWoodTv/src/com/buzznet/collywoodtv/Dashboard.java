@@ -209,7 +209,7 @@ public void vidsSet(Imagedash[] Result) {
 				public void onClick(View v) {
 					
 					 String vidid;
-					    Intent vid = new Intent(getApplicationContext(), teaser.class);
+					   Intent vid = new Intent(getApplicationContext(), teaser.class);
 		               vid.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		               vid.putExtra("url", i.vidUrl);
 		               vid.putExtra("Exc", i.desc);
