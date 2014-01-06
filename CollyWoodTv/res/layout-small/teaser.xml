@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TabHost
+        android:id="@android:id/tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+              
+           <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+             
+            </TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <LinearLayout
+                    android:id="@+id/Description"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+                    
+                      <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.31"
+                        android:src="@drawable/ic_action_photo" />
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.37"
+                        android:text="TextView" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Trailer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" 
+                     android:orientation="vertical" >
+                     
+                     <com.google.android.youtube.player.YouTubePlayerView
+                     android:id="@+id/youtube_view"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentTop="true"
+                     android:layout_centerHorizontal="true"
+                     android:layout_margin="12dip"
+                     android:layout_marginTop="72dp" >
+                    </com.google.android.youtube.player.YouTubePlayerView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Comments"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                     android:orientation="vertical" >
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+
+</LinearLayout>

@@ -5,6 +5,27 @@ public class Imagedash {
 		String urlimg;
 		Bitmap thumbimg;
 		String cat;
+		String vidUrl;
+		String desc;
+		String pid;
+		public String getPid() {
+			return pid;
+		}
+		public void setPid(String pid) {
+			this.pid = pid;
+		}
+		public String getDesc() {
+			return desc;
+		}
+		public void setDesc(String desc) {
+			this.desc = desc;
+		}
+		public String getVidUrl() {
+			return vidUrl;
+		}
+		public void setVidUrl(String vidUrl) {
+			this.vidUrl = vidUrl;
+		}
 		public String getCat() {
 			return cat;
 		}

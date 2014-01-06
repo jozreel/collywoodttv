@@ -12,6 +12,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
@@ -117,7 +118,7 @@ public void Callback(String Result) {
        ArrayList<String> title = new ArrayList<String>();
        
        ArrayList<collyvideos> cv = new ArrayList<collyvideos>();
-       String titles, excerpt,image,producer,country;
+       String titles, excerpt,image,producer,country, id;
        try{
 		jsonObj = new  JSONObject(str);
 		Iterator<?> keys = jsonObj.keys();
@@ -132,11 +133,13 @@ public void Callback(String Result) {
 				String url = jsonvid.getString("thumb");
 				cat = jsonvid.getString("cat");
 				image =url;
+				String vidurl = jsonvid.getString("yotube");
 				//imgs.add(url);
 				//title.add(jsonvid.getString("postTitle"));
 				titles = jsonvid.getString("postTitle");
 				excerpt = jsonvid.getString("excerpt");
-				collyvideos acv = new collyvideos(image,excerpt,titles,cat,"","");
+				id = jsonvid.getString("postId");
+				collyvideos acv = new collyvideos(image,vidurl,excerpt,titles,cat,id,"","");
 				cv.add(acv);
 				
 			}
@@ -177,7 +180,7 @@ public void vidsSet(Imagedash[] Result) {
 		
 		ImageView iv = null;
 		//GridView gv = (GridView)findViewById(R.id.gridView1);
-		for(Imagedash i: Result)
+		for(final Imagedash i: Result)
 		{
 			String category = i.getCat();
 			String movie = new String("Movies");
@@ -197,8 +200,51 @@ public void vidsSet(Imagedash[] Result) {
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(130,190);
 			params.setMargins(10, 1, 50, 1);
 			iv.setLayoutParams(params);
-			iv.setScaleType(ImageView.ScaleType.FIT_XY);
+			//iv.setScaleType(ImageView.ScaleType.FIT_XY);
 		     iv.setImageBitmap(i.thumbimg);
+		     iv.setOnClickListener(new View.OnClickListener() {
+			
+			
+				@Override
+				public void onClick(View v) {
+					
+					 String vidid;
+					    Intent vid = new Intent(getApplicationContext(), teaser.class);
+		               vid.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		               vid.putExtra("url", i.vidUrl);
+		               vid.putExtra("Exc", i.desc);
+		               vid.putExtra("bitmap", i.thumbimg);
+		               vid.putExtra("id", i.pid);
+		               startActivity(vid);
+		              // finish();
+					 
+					 
+					 /*commented out for testing youtube api 
+					 String vid = i.vidUrl;
+					int pos = vid.indexOf("?rel");
+					if(pos!= -1)
+						vidid = vid.substring(0, pos);
+					else 
+						vidid = vid;
+					  String s = "http://www.youtube.com/watch?v="+vidid;
+					  Uri uri = Uri.parse(s);
+					  Intent intt = new Intent(Intent.ACTION_VIEW, uri);
+					  // intt.setData(Uri.parse(i.vidUrl));
+					   startActivity(intt);
+					   
+					   */
+					   
+					   
+					  // Uri uri = Uri.parse(s);
+					   
+					  // videoView.setVideoURI(uri);
+					   
+					 //  videoView.requestFocus();
+					   
+					 //  videoView.start();
+					
+				}
+			});
 		
 		tbl.addView(iv);
 		}
@@ -210,6 +256,8 @@ public void vidsSet(Imagedash[] Result) {
 	
 	
 }
+
+
 
 
 }

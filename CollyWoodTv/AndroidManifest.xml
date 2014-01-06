@@ -51,8 +51,26 @@
             android:configChanges="orientation|screenSize"
             android:label="">
         </activity>
+        
+        
+         <activity
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:name="com.buzznet.collywoodtv.videoplay"
+            android:configChanges="orientation|screenSize"
+            android:label="">
+        </activity>
+        
+         
+           
+         <activity
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:name="com.buzznet.collywoodtv.teaser"
+            android:configChanges="orientation|screenSize"
+            android:label="">
+        </activity>
        
-  
+        
+        
         <activity
             android:name="com.buzznet.collywoodtv.GridDisp"
             android:label="">

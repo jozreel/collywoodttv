@@ -7,6 +7,14 @@ public class collyvideos {
 	private String Producer;
 	private String country;
 	private String cat;
+	private String youtubeUrl;
+	private String id;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getCat() {
 		return cat;
 	}
@@ -43,13 +51,21 @@ public class collyvideos {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public collyvideos(String img, String Excerpt,String title,String caty,String Producer,String Country) {
+	public collyvideos(String img, String youTubeUrl, String Excerpt,String title,String caty, String id, String Producer,String Country) {
 		this.country=Country;
 		this.Producer = Producer;
 		this.ImgUrl = img;
 		this.title = title;
 		this.Excerpt = Excerpt;
 		this.cat =caty;
+		this.youtubeUrl = youTubeUrl;
+		this.id = id;
+	}
+	public String getYoutubeUrl() {
+		return youtubeUrl;
+	}
+	public void setYoutubeUrl(String youtubeUrl) {
+		this.youtubeUrl = youtubeUrl;
 	}
 
 }

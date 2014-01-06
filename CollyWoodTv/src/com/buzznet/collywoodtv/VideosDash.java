@@ -60,6 +60,9 @@ public class VideosDash {
 			myImages[i] = new Imagedash();
 			myImages[i].urlimg =cv.get(i).getImgUrl();
 			myImages[i].cat =cv.get(i).getCat();
+			myImages[i].vidUrl =cv.get(i).getYoutubeUrl();
+			myImages[i].desc =cv.get(i).getExcerpt();
+			myImages[i].pid =cv.get(i).getId();
 		}
 		lt.execute(myImages);
 		// setStuff();
