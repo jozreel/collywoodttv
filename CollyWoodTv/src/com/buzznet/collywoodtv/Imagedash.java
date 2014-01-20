@@ -8,6 +8,22 @@ public class Imagedash {
 		String vidUrl;
 		String desc;
 		String pid;
+		String title;
+		String realv;
+		
+		
+		public String getRealv() {
+			return realv;
+		}
+		public void setRealv(String realv) {
+			this.realv = realv;
+		}
+		public String getTitle() {
+			return title;
+		}
+		public void setTitle(String title) {
+			this.title = title;
+		}
 		public String getPid() {
 			return pid;
 		}

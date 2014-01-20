@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 import org.json.JSONObject;
 import android.app.ActionBar.LayoutParams;
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -35,11 +36,16 @@ public class Dashboard extends ActionBarActivity implements DashVidAc{
 	Bundle ex;
 	GridView viddImages;
 	private static String serverUrl = "http://www.collywoodcinemas.com/androidapp.php";
+	private String hasVideos;
+	private String real;
+	private String title;
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	// TODO Auto-generated method stub
 	super.onCreate(savedInstanceState);
 	boolean reload =true;
+	Intent intnt =  new Intent(getApplicationContext(), datald.class);
+	startActivity(intnt);
 	setContentView(R.layout.dashboard);
 	
 	
@@ -127,6 +133,7 @@ public void Callback(String Result) {
 		String cat;
 		while(keys.hasNext())
 		{
+			
 			String key = (String)keys.next();
 			if( jsonObj.get(key) instanceof JSONObject ){
 				jsonvid = jsonObj.getJSONObject(key);
@@ -134,12 +141,14 @@ public void Callback(String Result) {
 				cat = jsonvid.getString("cat");
 				image =url;
 				String vidurl = jsonvid.getString("yotube");
+			    real =  jsonvid.getString("hasreal");
+				
 				//imgs.add(url);
 				//title.add(jsonvid.getString("postTitle"));
 				titles = jsonvid.getString("postTitle");
 				excerpt = jsonvid.getString("excerpt");
 				id = jsonvid.getString("postId");
-				collyvideos acv = new collyvideos(image,vidurl,excerpt,titles,cat,id,"","");
+				collyvideos acv = new collyvideos(image,vidurl,excerpt,titles,cat,id,real,"","");
 				cv.add(acv);
 				
 			}
@@ -207,7 +216,13 @@ public void vidsSet(Imagedash[] Result) {
 			
 				@Override
 				public void onClick(View v) {
-					
+					String accesss = "";
+					String hasVid = "";
+					   if(ex != null)
+					   {
+					    accesss =  ex.getString("access");
+					   
+					   }
 					 String vidid;
 					   Intent vid = new Intent(getApplicationContext(), teaser.class);
 		               vid.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -215,6 +230,9 @@ public void vidsSet(Imagedash[] Result) {
 		               vid.putExtra("Exc", i.desc);
 		               vid.putExtra("bitmap", i.thumbimg);
 		               vid.putExtra("id", i.pid);
+		               vid.putExtra("access", accesss);
+		               vid.putExtra("realvid", i.realv);
+		               vid.putExtra("title", i.title);
 		               startActivity(vid);
 		              // finish();
 					 
@@ -248,6 +266,8 @@ public void vidsSet(Imagedash[] Result) {
 		
 		tbl.addView(iv);
 		}
+		Activity dff =  datald.getinstance();
+		dff.finish();
 	}
 	catch(Exception e)
 	{

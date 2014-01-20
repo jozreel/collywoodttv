@@ -24,7 +24,10 @@
                 android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
-
+                 <ScrollView
+                            android:id="@+id/scrollView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" >
                 <LinearLayout
                     android:id="@+id/Description"
                     android:layout_width="match_parent"
@@ -49,6 +52,7 @@
                             android:layout_height="wrap_content"
                             android:text="TextView" />
 
+
                         <RatingBar
                             android:id="@+id/ratingBar1"
                             android:layout_width="wrap_content"
@@ -59,7 +63,12 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
+             </ScrollView>
+                
+                 <ScrollView
+                            android:id="@+id/scrollView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" >
                 <LinearLayout
                     android:id="@+id/Trailer"
                     android:layout_width="match_parent"
@@ -76,14 +85,21 @@
                      android:layout_marginTop="72dp" >
                     </com.google.android.youtube.player.YouTubePlayerView>
                 </LinearLayout>
-
+                </ScrollView>
+                
+                 <ScrollView
+                            android:id="@+id/scrollView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" >
                 <LinearLayout
                     android:id="@+id/Comments"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                      android:orientation="vertical" >
+                  
                        
                 </LinearLayout>
+                </ScrollView>
             </FrameLayout>
         </LinearLayout>
     </TabHost>

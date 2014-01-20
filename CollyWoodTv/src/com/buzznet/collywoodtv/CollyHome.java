@@ -27,7 +27,9 @@ public class CollyHome extends Activity {
     private static String KEY_NAME = "displayname";
     private static String KEY_EMAIL = "email";
     private static String KEY_DISPLAY = "displayname";
+    private static String KEY_ACCESS = "access";
     private static CollyHome mc = null;
+    Intent splashy = null;
     CollyUserFunctions cuf;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,10 @@ public class CollyHome extends Activity {
 
 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                            InputMethodManager.HIDE_NOT_ALWAYS);
+                 splashy =  new Intent(getApplicationContext(), splash.class);
+                 splashy.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                 splashy.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                 startActivity(splashy);
 				 cuf = new CollyUserFunctions(mc);
 				 String username = userName.getText().toString();
 					String passwd = password.getText().toString();
@@ -86,6 +92,8 @@ inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
 			String res = jo.getString(KEY_SUCESS);
 			if(Integer.parseInt(res)==1)
 			{
+				Activity sp =  splash.getinstatce();
+			    sp.finish();
 				CollyData db = new CollyData(getApplicationContext());
                 JSONObject json_user = jo.getJSONObject("user");
                 
@@ -95,11 +103,14 @@ inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                 Intent dashboard = new Intent(getApplicationContext(), Dashboard.class);
                 dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 dashboard.putExtra("user", json_user.getString(KEY_DISPLAY));
+                dashboard.putExtra("access", json_user.getString(KEY_ACCESS));
                 startActivity(dashboard);
                 finish();
 			}
 			else
 			{
+				Activity sp =  splash.getinstatce();
+			    sp.finish();
 				loginerror.setText(jo.getString(KEY_ERROR_MSG));
 			}
 			

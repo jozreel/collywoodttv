@@ -13,7 +13,7 @@
      <LinearLayout
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:background="#880dbf"
+         android:background="#000000"
          android:orientation="vertical"
           >
 
@@ -35,7 +35,7 @@
              android:id="@+id/horizontalScrollView1"
              android:layout_width="fill_parent"
              android:layout_height="wrap_content"
-              android:background="#262626" >
+              android:background="#000000" >
 
              <LinearLayout
                  android:id="@+id/hscrol"
@@ -43,7 +43,7 @@
                  android:layout_height="fill_parent"
                  android:gravity="center_vertical"
                  android:orientation="horizontal"
-                  android:background="#880dbf" >
+                  android:background="#000000" >
              </LinearLayout>
          </HorizontalScrollView>
 
@@ -54,7 +54,7 @@
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:orientation="vertical" 
-          android:background="#880dbf">
+          android:background="#000000">
 
          <TextView
              android:id="@+id/textView2"
@@ -75,7 +75,7 @@
              android:id="@+id/horizontalScrollView2"
              android:layout_width="fill_parent"
              android:layout_height="wrap_content"
-              android:background="#262626" >
+              android:background="#000000" >
 
              <LinearLayout
                  android:id="@+id/hscrol2"
@@ -94,7 +94,7 @@
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:orientation="vertical" 
-          android:background="#880dbf">
+          android:background="#000000">
 
          <TextView
              android:id="@+id/textView3"
@@ -115,7 +115,7 @@
              android:id="@+id/horizontalScrollView3"
              android:layout_width="fill_parent"
              android:layout_height="wrap_content"
-              android:background="#262626" >
+              android:background="#000000" >
 
              <LinearLayout
                  android:id="@+id/hscrol3"
@@ -123,7 +123,7 @@
                  android:layout_height="fill_parent"
                  android:gravity="center_vertical"
                  android:orientation="horizontal"
-                  android:background="#880dbf" >
+                  android:background="#000000" >
              </LinearLayout>
          </HorizontalScrollView>
 

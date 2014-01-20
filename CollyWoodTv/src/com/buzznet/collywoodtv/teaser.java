@@ -11,6 +11,7 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayer.Provider;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+import android.R.integer;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Intent;
@@ -19,6 +20,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,8 +35,10 @@ YouTubePlayer.OnInitializedListener{
 	String vid;
 	String vidid;
 	String VIDEO;
+	Bitmap bitmap;
 	private static String serverUrl = "http://www.collywoodcinemas.com/androidapp.php";
 	static private final String DEVELOPER_KEY = "AIzaSyBxYf7Pu3v0KumqZfUyeZMD_c8JhUsmJiE";
+	Button myb;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -42,6 +47,12 @@ YouTubePlayer.OnInitializedListener{
 		setContentView(R.layout.teaser);
 		     bd = getIntent().getExtras();
 		     vid = bd.getString("url");
+		     
+		     
+		     
+		     
+		     
+		     
 		     TabHost tabs = (TabHost) findViewById(android.R.id.tabhost);
 	        tabs.setup();
 	    	
@@ -65,7 +76,8 @@ YouTubePlayer.OnInitializedListener{
 		TextView tv = (TextView)findViewById(R.id.textView1);
 	//	bd = getIntent().getExtras();
 		Intent intent = getIntent();
-		Bitmap bitmap = (Bitmap) intent.getParcelableExtra("bitmap");
+		bitmap = (Bitmap) intent.getParcelableExtra("bitmap");
+		
 		String st = bd.getString("Exc");
 		String rst = st.replaceAll("\\\n", "\\<br \\/\\>");
 		String rst1 = rst.replaceAll("\\[.*\\]", "");
@@ -95,6 +107,49 @@ YouTubePlayer.OnInitializedListener{
         
         getComments();
         getRattings();
+        //String stf =bd.getString("realvid");
+        String access = bd.getString("access");
+        if(Integer.parseInt(bd.getString("realvid"))   != 0)
+        {
+            myb = new Button(this);
+            myb.setText("Watch NOW");
+            LinearLayout ll = (LinearLayout)findViewById(R.id.Description);
+            LayoutParams lp = new LayoutParams( LayoutParams.WRAP_CONTENT,    LayoutParams.WRAP_CONTENT);
+            myb.setLayoutParams(lp);
+            ll.addView(myb);
+        if(access.equals(new String("s2member_level1")) || access.equals(new String("s2member_level2"))|| access.equals(new String("s2member_level4")) || access.equals(new String("Administrator")) ||access.equals(new String("s2member_level3")))
+        {
+          myb.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				  Intent vid = new Intent(getApplicationContext(), videoplay.class);
+	               vid.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	               String ttl = bd.getString("title");
+	               vid.putExtra("title",ttl);
+	               vid.putExtra("bitmap",  bitmap);
+	               startActivity(vid);
+			}
+		});
+        }
+        else
+        {
+        	 myb.setOnClickListener(new View.OnClickListener() {
+     			
+     			@Override
+     			public void onClick(View v) {
+     				// TODO Auto-generated method stub
+     				  Intent pay = new Intent(getApplicationContext(), Pay.class);
+     	               pay.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+     	               String ttl = bd.getString("title");
+     	               pay.putExtra("title",ttl);
+     	               startActivity(pay);
+     			}
+     		});
+        }
+        }
+        
       
 	}
 	@Override
@@ -130,6 +185,9 @@ YouTubePlayer.OnInitializedListener{
 		   getRatting gr = new getRatting(mp,this);
 		   gr.execute(serverUrl);
 	}
+	
+	
+	
 	
 	public void Callback(String Result)
 	{
@@ -226,6 +284,8 @@ YouTubePlayer.OnInitializedListener{
 		   	}
 		
 	}
+	
+	
 	 
 
 }

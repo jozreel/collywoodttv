@@ -69,7 +69,26 @@
             android:label="">
         </activity>
        
+          <activity
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:name="com.buzznet.collywoodtv.Pay"
+            android:configChanges="orientation|screenSize"
+            android:label="">
+        </activity>
+       
+         <activity
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:name="com.buzznet.collywoodtv.splash"
+            android:configChanges="orientation|screenSize"
+            android:label="">
+        </activity>
         
+           <activity
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:name="com.buzznet.collywoodtv.datald"
+            android:configChanges="orientation|screenSize"
+            android:label="">
+        </activity>
         
         <activity
             android:name="com.buzznet.collywoodtv.GridDisp"

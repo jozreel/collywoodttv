@@ -9,6 +9,15 @@ public class collyvideos {
 	private String cat;
 	private String youtubeUrl;
 	private String id;
+	private String hasreal;
+	
+	
+	public String getHasreal() {
+		return hasreal;
+	}
+	public void setHasreal(String hasreal) {
+		this.hasreal = hasreal;
+	}
 	public String getId() {
 		return id;
 	}
@@ -51,7 +60,7 @@ public class collyvideos {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public collyvideos(String img, String youTubeUrl, String Excerpt,String title,String caty, String id, String Producer,String Country) {
+	public collyvideos(String img, String youTubeUrl, String Excerpt,String title,String caty, String id, String realvd, String Producer,String Country) {
 		this.country=Country;
 		this.Producer = Producer;
 		this.ImgUrl = img;
@@ -60,6 +69,7 @@ public class collyvideos {
 		this.cat =caty;
 		this.youtubeUrl = youTubeUrl;
 		this.id = id;
+		this.hasreal = realvd;
 	}
 	public String getYoutubeUrl() {
 		return youtubeUrl;
