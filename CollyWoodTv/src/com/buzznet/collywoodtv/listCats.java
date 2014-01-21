@@ -1,7 +1,6 @@
 package com.buzznet.collywoodtv;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,11 +18,10 @@ import org.apache.http.util.EntityUtils;
 
 import android.os.AsyncTask;
 
-public class getVideoData extends AsyncTask<String, String, String> {
-
+public class listCats  extends AsyncTask<String, String, String> {
 	private HashMap<String, String> pData = null;
-	private DashVidAc listener;
-	public getVideoData(HashMap<String, String> data, DashVidAc lst)
+	private displayVidCatys listener;
+	public  listCats(HashMap<String, String> data, displayVidCatys lst)
 	{
 		pData = data;
 		this.listener = lst;
@@ -75,9 +73,8 @@ public class getVideoData extends AsyncTask<String, String, String> {
 		
 		super.onPostExecute(result);
 		
-		    listener.Callback(result);
-		
+		    listener.callback(result);
+	
 	}   
 	
-
 }

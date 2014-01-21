@@ -21,6 +21,7 @@ import java.util.concurrent.Executors;
 
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources.Theme;
 import android.graphics.Bitmap;
@@ -174,6 +175,7 @@ public class VideosDash {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			mylist.vidsSet(result);
+			
 		}
 	
 		

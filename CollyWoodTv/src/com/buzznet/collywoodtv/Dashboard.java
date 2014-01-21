@@ -90,6 +90,7 @@ protected void onCreate(Bundle savedInstanceState) {
 		   break;
 	   case R.id.menuMovies:
 		   menuItem.setTitle("Movies");
+		   searchBy("movies");
 		   break;
 	   case R.id.menuSeries:
 		   menuItem.setTitle("Series");
@@ -277,7 +278,15 @@ public void vidsSet(Imagedash[] Result) {
 	
 }
 
-
-
+public void searchBy(String tag)
+{
+	Intent inttt =  new Intent(getApplicationContext(),  displayVidCatys.class);
+	inttt.putExtra("access", ex.getString("access"));
+	inttt.putExtra("tag", tag);
+	startActivity(inttt);
+	
+	  
+	
+}
 
 }
