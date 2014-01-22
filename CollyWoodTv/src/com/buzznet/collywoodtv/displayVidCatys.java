@@ -6,14 +6,19 @@ import java.util.Iterator;
 
 import org.json.JSONObject;
 
+import com.buzznet.collywoodtv.R.layout;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore.Video.VideoColumns;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class displayVidCatys extends Activity implements DashVidAc{
@@ -132,11 +137,12 @@ public class displayVidCatys extends Activity implements DashVidAc{
 				String feat = new String("Featured");
 				String ppv = new String("ppv");
 				 iv= new ImageView(this);
-				
+				 ImageButton ib = (ImageButton)findViewById(R.id.ibRight);
+				 ImageButton ibl = (ImageButton)findViewById(R.id.ibleft);
 					LinearLayout tbl = (LinearLayout)findViewById(R.id.scl);
 				
 				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(230,290);
-				params.setMargins(1, 1, 50, 1);
+				params.setMargins(1, 1, 30, 1);
 				iv.setLayoutParams(params);
 				iv.setScaleType(ImageView.ScaleType.FIT_XY);
 			     iv.setImageBitmap(i.thumbimg);

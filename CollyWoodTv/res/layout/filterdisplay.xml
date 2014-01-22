@@ -52,7 +52,7 @@
        android:layout_toRightOf="@id/ibleft"
         android:layout_toLeftOf="@id/ibRight"
         android:layout_gravity="center_vertical" 
-          android:fadingEdgeLength="100dp">
+        >
 
         <LinearLayout
             android:id="@+id/scl"

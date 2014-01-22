@@ -94,10 +94,13 @@ protected void onCreate(Bundle savedInstanceState) {
 		   break;
 	   case R.id.menuSeries:
 		   menuItem.setTitle("Series");
+		   searchBy("series");
 		   break;
-	   case R.id.menuAll:
+	/*   case R.id.menuAll:
 		   menuItem.setTitle("ALL");
-		   
+		   searchBy("ALL");
+		   break;
+		   */
 		   
 		 
 		 //  openSearch();
