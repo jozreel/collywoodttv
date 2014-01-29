@@ -55,7 +55,7 @@ YouTubePlayer.OnInitializedListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_video);
 		ex = getIntent().getExtras();
-		
+		 
 
 	       HashMap<String, String> mp = new HashMap<String, String>();
 		   mp.put("tag", "realVid");
