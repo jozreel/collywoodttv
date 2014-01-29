@@ -21,7 +21,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class Pay extends Activity implements android.view.View.OnClickListener{
 
@@ -35,7 +37,7 @@ public class Pay extends Activity implements android.view.View.OnClickListener{
     private static final String CONFIG_CLIENT_ID = "credential from developer.paypal.com";
     // when testing in sandbox, this is likely the -facilitator email address. 
     private static final String CONFIG_RECEIVER_EMAIL = "junior.hart@yahoo.co.uk"; 
-  
+    Bundle bd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +48,7 @@ public class Pay extends Activity implements android.view.View.OnClickListener{
         
             PayPal ppObj = PayPal.getInstance();
             
-            
+          bd  = getIntent().getExtras();
             
 
             if (ppObj == null) {  // Test to see if the library is already initialized
@@ -72,12 +74,18 @@ public class Pay extends Activity implements android.view.View.OnClickListener{
             	}
             
             
+            TextView tv = new TextView(this);
+            tv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
+            tv.setText("We have a one day trial which costs #1.00 to view our trial section");
             
+            TextView tv1 = new TextView(this);
+            tv1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
+            tv1.setText("Our monthly membership which gives full access to all our Caribbean Films &  TV series for $5.00!");
     		CheckoutButton launchPayPalButton = ppObj.getCheckoutButton(this,PayPal.BUTTON_194x37, CheckoutButton.TEXT_PAY);
     		CheckoutButton launchPayPalButton1 = ppObj.getCheckoutButton(this,PayPal.BUTTON_194x37, CheckoutButton.TEXT_PAY);
-    		
+   
     		LinearLayout.LayoutParams params = new
-    				LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+    				LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
     						LinearLayout.LayoutParams.WRAP_CONTENT);
     		//params.addRule(LinearLayout.ALIGN_PARENT_BOTTOM);
     		
@@ -85,15 +93,19 @@ public class Pay extends Activity implements android.view.View.OnClickListener{
     		
     		launchPayPalButton.setLayoutParams(params);
     		launchPayPalButton.setOnClickListener(this);
-    		
+    		launchPayPalButton.setTag(101);
+    		launchPayPalButton1.setTag(102);
+    		launchPayPalButton1.setOnClickListener(this);
+    		((LinearLayout)findViewById(R.id.paylaout)).addView(tv);
     		((LinearLayout)findViewById(R.id.paylaout)).addView(launchPayPalButton);
+    		((LinearLayout)findViewById(R.id.paylaout)).addView(tv1);
     		((LinearLayout)findViewById(R.id.paylaout)).addView(launchPayPalButton1);
         
         
         
         
         
-Intent i = new Intent(this, PayPalService.class);
+      Intent i = new Intent(this, PayPalService.class);
         
         i.putExtra(PaymentActivity.EXTRA_PAYPAL_ENVIRONMENT, CONFIG_ENVIRONMENT);
         i.putExtra(PaymentActivity.EXTRA_CLIENT_ID, CONFIG_CLIENT_ID);
@@ -126,9 +138,17 @@ Intent i = new Intent(this, PayPalService.class);
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		
-		 PayPalPayment thingToBuy = new PayPalPayment(new BigDecimal("5.00"), "USD", "TheArrangment");
-	        
+		PayPalPayment thingToBuy = null;
+		int s = ((Integer) v.getTag()).intValue();
+	    switch(s)
+	    {
+	    case 101:
+	    	thingToBuy  = new PayPalPayment(new BigDecimal("1.00"), "USD", bd.getString("title"));
+	    	break;
+	    case 102:
+	    	thingToBuy  = new PayPalPayment(new BigDecimal("5.00"), "USD", bd.getString("title"));
+	    	break;
+	    } 
 	        Intent intent = new Intent(this, PaymentActivity.class);
 	        
 	        

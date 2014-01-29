@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore.Video.VideoColumns;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
@@ -128,6 +129,8 @@ public class displayVidCatys extends Activity implements DashVidAc{
 		try{
 			
 			ImageView iv = null;
+			int dim = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 340, getResources().getDisplayMetrics());
+			int dimh = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 430, getResources().getDisplayMetrics());
 			//GridView gv = (GridView)findViewById(R.id.gridView1);
 			for(final Imagedash i: Result)
 			{
@@ -141,7 +144,7 @@ public class displayVidCatys extends Activity implements DashVidAc{
 				 ImageButton ibl = (ImageButton)findViewById(R.id.ibleft);
 					LinearLayout tbl = (LinearLayout)findViewById(R.id.scl);
 				
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(230,290);
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dim,dimh);
 				params.setMargins(1, 1, 30, 1);
 				iv.setLayoutParams(params);
 				iv.setScaleType(ImageView.ScaleType.FIT_XY);

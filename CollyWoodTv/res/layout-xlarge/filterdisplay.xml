@@ -43,31 +43,22 @@
        android:layout_alignParentRight="true"
        android:layout_alignParentTop="true"
        android:src="@drawable/ic_action_next_item" />
-        
-        
+
    <HorizontalScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       android:layout_toRightOf="@id/ibleft"
-        android:layout_toLeftOf="@id/ibRight"
-        android:layout_gravity="center_vertical" 
-          android:fadingEdgeLength="100dp">
+       android:id="@+id/scrollView1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true"
+       android:layout_centerVertical="true"
+       android:fadingEdgeLength="100dp" >
 
-        <LinearLayout
-            android:id="@+id/scl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal" 
-            >
-          
-           
-        </LinearLayout>
-         
- </HorizontalScrollView>
-
-   
+       <LinearLayout
+           android:id="@+id/scl"
+           android:layout_width="fill_parent"
+           android:layout_height="fill_parent"
+           android:orientation="horizontal" >
+       </LinearLayout>
+   </HorizontalScrollView>
  
 </RelativeLayout>
  

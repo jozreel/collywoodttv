@@ -21,6 +21,7 @@ import android.support.v7.app.ActionBarActivity;
 
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -190,7 +191,8 @@ public void layoutVids(ArrayList<collyvideos> cv)
 public void vidsSet(Imagedash[] Result) {
 	LinearLayout tbl = null;// (LinearLayout)findViewById(R.id.hscrol);
 	try{
-		
+		int dim = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 130, getResources().getDisplayMetrics());
+		int dimh = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 190, getResources().getDisplayMetrics());
 		ImageView iv = null;
 		//GridView gv = (GridView)findViewById(R.id.gridView1);
 		for(final Imagedash i: Result)
@@ -210,7 +212,9 @@ public void vidsSet(Imagedash[] Result) {
 					tbl = (LinearLayout)findViewById(R.id.hscrol3);
 				else
 				continue;
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(130,190);
+			
+			
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dim,dimh);
 			params.setMargins(10, 1, 50, 1);
 			iv.setLayoutParams(params);
 			//iv.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -237,6 +241,7 @@ public void vidsSet(Imagedash[] Result) {
 		               vid.putExtra("access", accesss);
 		               vid.putExtra("realvid", i.realv);
 		               vid.putExtra("title", i.title);
+		               vid.putExtra("cat", i.cat);
 		               startActivity(vid);
 		              // finish();
 					 

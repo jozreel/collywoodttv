@@ -3,27 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/paylaout" >
+    android:id="@+id/paylaout" 
+    android:padding = "20dp">
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="We have a one day trial which costs only $1.00 to view our Trial Section!" 
-        android:layout_gravity="center_horizontal"/>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" 
-        android:layout_gravity="center_horizontal"/>
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" 
-        android:layout_gravity="center_horizontal"/>
+  
 
 </LinearLayout>

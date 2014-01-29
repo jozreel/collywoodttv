@@ -1,8 +1,10 @@
 package com.buzznet.collywoodtv;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -10,6 +12,13 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayer.Provider;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.paypal.android.MEP.CheckoutButton;
+import com.paypal.android.MEP.PayPal;
+import com.paypal.android.MEP.PayPalActivity;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 import android.R.integer;
 import android.app.ActionBar.LayoutParams;
@@ -20,6 +29,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -36,6 +46,12 @@ YouTubePlayer.OnInitializedListener{
 	String vidid;
 	String VIDEO;
 	Bitmap bitmap;
+private static final String CONFIG_ENVIRONMENT = PaymentActivity.ENVIRONMENT_NO_NETWORK;
+    
+    // note that these credentials will differ between live & sandbox environments.
+    private static final String CONFIG_CLIENT_ID = "credential from developer.paypal.com";
+    // when testing in sandbox, this is likely the -facilitator email address. 
+    private static final String CONFIG_RECEIVER_EMAIL = "junior.hart@yahoo.co.uk"; 
 	private static String serverUrl = "http://www.collywoodcinemas.com/androidapp.php";
 	static private final String DEVELOPER_KEY = "AIzaSyBxYf7Pu3v0KumqZfUyeZMD_c8JhUsmJiE";
 	Button myb;
@@ -82,8 +98,9 @@ YouTubePlayer.OnInitializedListener{
 		String rst = st.replaceAll("\\\n", "\\<br \\/\\>");
 		String rst1 = rst.replaceAll("\\[.*\\]", "");
 		tv.setText(Html.fromHtml(rst1));
-		
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(300,400);
+		int dim = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 340, getResources().getDisplayMetrics());
+		int dimh = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 430, getResources().getDisplayMetrics());
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dim,dimh);
 		params.setMargins(10, 1, 50, 1);
 		
 		
@@ -109,14 +126,74 @@ YouTubePlayer.OnInitializedListener{
         getRattings();
         //String stf =bd.getString("realvid");
         String access = bd.getString("access");
-        if(Integer.parseInt(bd.getString("realvid"))   != 0)
+        if(Integer.parseInt(bd.getString("realvid"))   > 0)
         {
+           
             myb = new Button(this);
             myb.setText("Watch NOW");
             LinearLayout ll = (LinearLayout)findViewById(R.id.Description);
             LayoutParams lp = new LayoutParams( LayoutParams.WRAP_CONTENT,    LayoutParams.WRAP_CONTENT);
             myb.setLayoutParams(lp);
-            ll.addView(myb);
+            if(!bd.getString("cat").equals(new String("ppv")))
+                ll.addView(myb);
+            
+        //ppv stuff
+            
+            
+            if(bd.getString("cat").equals(new String("ppv")) && Integer.parseInt(bd.getString("realvid")) ==1)
+            {
+            
+            	PayPal ppObjt = initService();
+            	
+            	CheckoutButton launchPayPalButton = ppObjt.getCheckoutButton(this,PayPal.BUTTON_194x37, CheckoutButton.TEXT_PAY);
+            	 ((LinearLayout)findViewById(R.id.Description)).addView(launchPayPalButton);
+            	 
+            	 
+            	 Intent i = new Intent(this, PayPalService.class);
+                 
+                 i.putExtra(PaymentActivity.EXTRA_PAYPAL_ENVIRONMENT, CONFIG_ENVIRONMENT);
+                 i.putExtra(PaymentActivity.EXTRA_CLIENT_ID, CONFIG_CLIENT_ID);
+                 i.putExtra(PaymentActivity.EXTRA_RECEIVER_EMAIL, CONFIG_RECEIVER_EMAIL);
+                 
+                 startService(i);
+                 final Intent intent1 = new Intent(this, PaymentActivity.class);
+                 
+                 launchPayPalButton.setOnClickListener(new View.OnClickListener(
+                		 ) {
+					
+					@Override
+					public void onClick(View v) {
+						 PayPalPayment thingToBuy = new PayPalPayment(new BigDecimal("5.00"), "USD", bd.getString("title"));
+					        
+					       
+					        
+					        intent1.putExtra(PaymentActivity.EXTRA_PAYPAL_ENVIRONMENT, CONFIG_ENVIRONMENT);
+					        intent1.putExtra(PaymentActivity.EXTRA_CLIENT_ID, CONFIG_CLIENT_ID);
+					        intent1.putExtra(PaymentActivity.EXTRA_RECEIVER_EMAIL, CONFIG_RECEIVER_EMAIL);
+					        
+					        // It's important to repeat the clientId here so that the SDK has it if Android restarts your 
+					        // app midway through the payment UI flow.
+					        intent1.putExtra(PaymentActivity.EXTRA_CLIENT_ID, "credential-from-developer.paypal.com");
+					        intent1.putExtra(PaymentActivity.EXTRA_PAYER_ID, "your-customer-id-in-your-system");
+					        intent1.putExtra(PaymentActivity.EXTRA_PAYMENT, thingToBuy);
+					        
+					        startActivityForResult(intent1, 0);
+						
+						
+						// TODO Auto-generated method stub
+						
+					}
+				});
+            	 
+            	
+            }
+            
+            
+        
+        //END ppv stuff
+            
+      if(!bd.getString("cat").equals(new String("ppv")))  
+      {
         if(access.equals(new String("s2member_level1")) || access.equals(new String("s2member_level2"))|| access.equals(new String("s2member_level4")) || access.equals(new String("Administrator")) ||access.equals(new String("s2member_level3")))
         {
           myb.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +226,7 @@ YouTubePlayer.OnInitializedListener{
      		});
         }
         }
+       }
         
       
 	}
@@ -286,6 +364,91 @@ YouTubePlayer.OnInitializedListener{
 	}
 	
 	
+	 public PayPal initService()
+	 {
+		  PayPal ppObj = PayPal.getInstance();
+          
+          bd  = getIntent().getExtras();
+            
+
+            if (ppObj == null) {  // Test to see if the library is already initialized
+
+            	// This main initialization call takes your Context, AppID, and target server
+            	ppObj = PayPal.initWithAppID(this, "APP-80W284485P519543T", PayPal.ENV_NONE);
+
+            	// Required settings:
+
+            	// Set the language for the library
+            	ppObj.setLanguage("en_US");
+
+            	// Some Optional settings:
+
+            	// Sets who pays any transaction fees. Possible values are:
+            	// FEEPAYER_SENDER, FEEPAYER_PRIMARYRECEIVER, FEEPAYER_EACHRECEIVER, and FEEPAYER_SECONDARYONLY
+            	ppObj.setFeesPayer(PayPal.FEEPAYER_EACHRECEIVER);
+
+            	// true = transaction requires shipping
+            	ppObj.setShippingEnabled(true);
+
+            	//_paypalLibraryInit = true;
+            	}
+           return ppObj;
+	 }
+	 
+	 
+	 
+	 @Override
+	    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+	        if (resultCode == Activity.RESULT_OK) {
+	            PaymentConfirmation confirm = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+	            if (confirm != null) {
+	                try {
+	                    Log.i("paymentExample", confirm.toJSONObject().toString(4));
+	                    
+	                    String payKey = data.getStringExtra(PayPalActivity.EXTRA_PAY_KEY);
+	                    
+	                    
+	                    String vidttl ="";
+	                    String vidtitle =  bd.getString("title");
+	    		   	    int pos = vidtitle.indexOf("Pay Per View");
+	    				if(pos!= -1)
+	    					vidttl = vidtitle.substring(0,pos-1);
+	    				
+	                    
+	                   Intent vid = new Intent(getApplicationContext(), videoplay.class);
+	 	               vid.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	 	               String ttl = bd.getString("title");
+	 	               vid.putExtra("title",vidttl);
+	 	               vid.putExtra("bitmap",  bitmap);
+	 	               startActivity(vid);
+
+	                    // TODO: send 'confirm' to your server for verification.
+	                    // see https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
+	                    // for more details.
+
+	                } catch (JSONException e) {
+	                    Log.e("paymentExample", "an extremely unlikely failure occurred: ", e);
+	                }
+	            }
+	        }
+	        else if (resultCode == Activity.RESULT_CANCELED) {
+	            Log.i("paymentExample", "The user canceled.");
+	        }
+	        else if (resultCode == PaymentActivity.RESULT_PAYMENT_INVALID) {
+	            Log.i("paymentExample", "An invalid payment was submitted. Please see the docs.");
+	        }
+	    }
+	    
+	    @Override
+	    public void onDestroy() {
+	        stopService(new Intent(this, PayPalService.class));
+	        super.onDestroy();
+	    }
+	    
+	 
+	 
+	 
+	 
 	 
 
 }
