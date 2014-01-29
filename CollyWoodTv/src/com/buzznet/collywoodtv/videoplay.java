@@ -64,6 +64,7 @@ YouTubePlayer.OnInitializedListener {
 		   gvd.execute(serverUrl);
 		   youTubeView1 = (YouTubePlayerView)findViewById(R.id.youtube_view1);
 		  
+		   
 		/*
 		 if(ex!=null)
 		    	vid = ex.getString("url");
