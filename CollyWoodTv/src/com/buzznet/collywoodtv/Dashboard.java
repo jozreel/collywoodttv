@@ -231,6 +231,7 @@ public void vidsSet(Imagedash[] Result) {
 					    accesss =  ex.getString("access");
 					   
 					   }
+					 
 					 String vidid;
 					   Intent vid = new Intent(getApplicationContext(), teaser.class);
 		               vid.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -242,9 +243,22 @@ public void vidsSet(Imagedash[] Result) {
 		               vid.putExtra("realvid", i.realv);
 		               vid.putExtra("title", i.title);
 		               vid.putExtra("cat", i.cat);
+		               String cas =  i.cat;
+		               int Rlv =  Integer.parseInt(i.realv);
+		               if((!cas.equals(new String("ppv")))||(cas.equals(new String("ppv")) && Rlv ==1))
+					   {
 		               startActivity(vid);
 		              // finish();
-					 
+					   }
+					   else if(cas.equals(new String("ppv")) && Rlv >1)
+					   {
+						   Intent vid1 = new Intent(getApplicationContext(), videoplay.class);
+		                  vid1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		                  vid1.putExtra("cat", i.cat);
+		                  vid1.putExtra("title", i.title);
+		                  vid1.putExtra("bitmap", i.thumbimg);
+						  startActivity(vid1);
+					   }
 					 
 					 /*commented out for testing youtube api 
 					 String vid = i.vidUrl;

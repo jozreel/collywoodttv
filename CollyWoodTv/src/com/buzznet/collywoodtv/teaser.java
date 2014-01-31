@@ -187,7 +187,7 @@ private static final String CONFIG_ENVIRONMENT = PaymentActivity.ENVIRONMENT_NO_
             	 
             	
             }
-            
+          
             
         
         //END ppv stuff
@@ -205,6 +205,7 @@ private static final String CONFIG_ENVIRONMENT = PaymentActivity.ENVIRONMENT_NO_
 	               vid.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	               String ttl = bd.getString("title");
 	               vid.putExtra("title",ttl);
+	               vid.putExtra("cat",bd.getString("cat"));
 	               vid.putExtra("bitmap",  bitmap);
 	               startActivity(vid);
 			}
